@@ -1,6 +1,6 @@
 # ComposeCourseYT
 learning jetpack compose
-## Here are pictures of the finsihed apps of all branches
+## Here are pictures of the finished apps of all branches
 ### videos 1 & 2
 ![videos1and2](https://github.com/OskarWiiala/ComposeCourseYT/blob/master/app/src/main/res/drawable/video1and2.png)
 
@@ -17,3 +17,7 @@ About adding an image, text inside an image, adding a gradient to an image, crop
 ![video5](https://github.com/OskarWiiala/ComposeCourseYT/blob/video5/app/src/main/res/drawable/video5.png)
 
 About styling text, custom fonts (remember to lowercase plus - to _, new android resource directory of font), annotated strings
+### video6
+![video6](https://github.com/OskarWiiala/ComposeCourseYT/blob/video6/app/src/main/res/drawable/video6.png)
+
+About use of state. includes an external mutableStateOf with remember and a callback function. By clicking the red box, the box under it changes to a random color.

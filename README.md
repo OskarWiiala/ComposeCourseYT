@@ -21,3 +21,7 @@ About styling text, custom fonts (remember to lowercase plus - to _, new android
 ![video6](https://github.com/OskarWiiala/ComposeCourseYT/blob/video6/app/src/main/res/drawable/video6.png)
 
 About use of state. includes an external mutableStateOf with remember and a callback function. By clicking the red box, the box under it changes to a random color.
+### video7
+![video7](https://github.com/OskarWiiala/ComposeCourseYT/blob/video7/app/src/main/res/drawable/video7.png)
+
+About Scaffold, Snackbar, coroutines and TextFields

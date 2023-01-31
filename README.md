@@ -33,6 +33,6 @@ About lists, such as regular column lists, LazyColumn lists, items() and itemsIn
 ### video9
 ![video9](https://github.com/OskarWiiala/ComposeCourseYT/blob/video9/app/src/main/res/drawable/video9.png)
 
-About ConstraintLayout. Remember to install the ConstraintLayout dependency in Gradle Module:app.
-implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+About ConstraintLayout. Remember to install the ConstraintLayout dependency in Gradle Module:app.<br>
+implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"<br>
 Includes ConstraintSet, constrain, createHorizontalChain and ConstraintLayout

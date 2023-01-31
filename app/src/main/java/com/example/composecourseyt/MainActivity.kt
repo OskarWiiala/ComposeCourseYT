@@ -16,10 +16,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ChainStyle
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
+import androidx.constraintlayout.compose.Dimension
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -27,61 +32,39 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            // only required if using regular Column to scroll
-            // Do not use regular column as scroll unless there are only a few items
-            // val scrollState = rememberScrollState()
-            // also, if using regular column to scroll, remember to use this modifier:
-            // modifier = Modifier.verticalScroll(scrollState)
+            // For ConstraintSet, you need to create references for-
+            // each composable we want to constrain in our layout
+            val constraints = ConstraintSet {
+                val greenBox = createRefFor(id = "greenbox")
+                val redBox = createRefFor(id = "redbox")
+                val guideLine = createGuidelineFromTop(0.5f)
 
-            // Use LazyColumn to scroll many items. It is very similar to RecyclerView in XML
-            LazyColumn {
-                itemsIndexed(
-                    listOf(
-                        "this",
-                        "is",
-                        "Jetpack",
-                        "Compose",
-                        "this",
-                        "is",
-                        "Jetpack",
-                        "Compose",
-                        "this",
-                        "is",
-                        "Jetpack",
-                        "Compose",
-                        "this",
-                        "is",
-                        "Jetpack",
-                        "Compose",
-                        "this",
-                        "is",
-                        "Jetpack",
-                        "Compose"
-                    )
-                ) { index, string ->
-                    Text(
-                        text = string,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 24.dp)
-                    )
+                constrain(greenBox) {
+                    // same as ConstrainTopToTopOf="parent" in XML
+                    // top.linkTo(parent.top)
+                    top.linkTo(guideLine)
+                    // same as ConstrainStartToStartOf="parent" in XML
+                    start.linkTo(parent.start)
+                    // Dimension also has percentages, match parent, fill to constraints etc.
+                    width = Dimension.value(100.dp)
+                    height = Dimension.value(100.dp)
                 }
-                items(5000) {
-                    /*Text(
-                        // it refers to the item, which is an Int.
-                        // Might as well consider it the index
-                        text = "Item $it",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 24.dp)
-                    )*/
+
+                constrain(redBox) {
+                    top.linkTo(parent.top)
+                    start.linkTo(greenBox.end)
+                    end.linkTo(parent.end)
+                    // if you want to stretch the red box between the green box and
+                    // right side of parent, add this:
+                    // width = Dimension.fillToConstraints
+                    width = Dimension.value(100.dp)
+                    height = Dimension.value(100.dp)
                 }
+                createHorizontalChain(greenBox, redBox, chainStyle = ChainStyle.Packed)
+            }
+            ConstraintLayout(constraints, modifier = Modifier.fillMaxSize()) {
+                Box(modifier = Modifier.background(Color.Green).layoutId("greenbox"))
+                Box(modifier = Modifier.background(Color.Red).layoutId("redbox"))
             }
         }
     }

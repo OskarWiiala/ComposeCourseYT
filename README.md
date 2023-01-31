@@ -29,3 +29,10 @@ About Scaffold, Snackbar, coroutines and TextFields
 ![video8](https://github.com/OskarWiiala/ComposeCourseYT/blob/video8/app/src/main/res/drawable/video8.png)
 
 About lists, such as regular column lists, LazyColumn lists, items() and itemsIndexed()
+
+### video9
+![video9](https://github.com/OskarWiiala/ComposeCourseYT/blob/video9/app/src/main/res/drawable/video9.png)
+
+About ConstraintLayout. Remember to install the ConstraintLayout dependency in Gradle Module:app.
+implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+Includes ConstraintSet, constrain, createHorizontalChain and ConstraintLayout

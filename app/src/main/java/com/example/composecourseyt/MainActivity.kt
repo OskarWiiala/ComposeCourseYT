@@ -32,40 +32,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            // For ConstraintSet, you need to create references for-
-            // each composable we want to constrain in our layout
-            val constraints = ConstraintSet {
-                val greenBox = createRefFor(id = "greenbox")
-                val redBox = createRefFor(id = "redbox")
-                val guideLine = createGuidelineFromTop(0.5f)
-
-                constrain(greenBox) {
-                    // same as ConstrainTopToTopOf="parent" in XML
-                    // top.linkTo(parent.top)
-                    top.linkTo(guideLine)
-                    // same as ConstrainStartToStartOf="parent" in XML
-                    start.linkTo(parent.start)
-                    // Dimension also has percentages, match parent, fill to constraints etc.
-                    width = Dimension.value(100.dp)
-                    height = Dimension.value(100.dp)
-                }
-
-                constrain(redBox) {
-                    top.linkTo(parent.top)
-                    start.linkTo(greenBox.end)
-                    end.linkTo(parent.end)
-                    // if you want to stretch the red box between the green box and
-                    // right side of parent, add this:
-                    // width = Dimension.fillToConstraints
-                    width = Dimension.value(100.dp)
-                    height = Dimension.value(100.dp)
-                }
-                createHorizontalChain(greenBox, redBox, chainStyle = ChainStyle.Packed)
-            }
-            ConstraintLayout(constraints, modifier = Modifier.fillMaxSize()) {
-                Box(modifier = Modifier.background(Color.Green).layoutId("greenbox"))
-                Box(modifier = Modifier.background(Color.Red).layoutId("redbox"))
-            }
         }
     }
 }

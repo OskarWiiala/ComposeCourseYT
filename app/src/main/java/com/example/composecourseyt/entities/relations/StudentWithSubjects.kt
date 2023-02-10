@@ -6,7 +6,7 @@ import androidx.room.Relation
 import com.example.composecourseyt.entities.Student
 import com.example.composecourseyt.entities.Subject
 
-data class StudentWithSubject(
+data class StudentWithSubjects(
     @Embedded val student: Student,
     @Relation(
         parentColumn = "studentName",

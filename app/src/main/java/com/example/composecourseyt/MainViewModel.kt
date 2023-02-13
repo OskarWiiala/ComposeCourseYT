@@ -26,11 +26,44 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    // Stateflow is used to keep state
+    // StateFlow can't really detect when the activity goes in the background
+    // other than that, it is the same as LiveData
+    private val _stateFlow = MutableStateFlow(0)
+    val stateFlow = _stateFlow.asStateFlow()
+
+    // SharedFlow is a hot flow
+    private val _sharedFlow = MutableSharedFlow<Int>(replay = 5)
+    val sharedFlow = _sharedFlow.asSharedFlow()
+
     init {
         // collectFlow()
         // collectFlow2()
         // collectFlow3()
-        collectFlow4()
+        // collectFlow4()
+        squareNumber(3)
+        viewModelScope.launch {
+            // collect is used because we want all events, not just the latest
+            sharedFlow.collect {
+                delay(2000L)
+                println("FIRST FLOW: the received number is $it")
+            }
+        }
+        viewModelScope.launch {
+            // collect is used because we want all events, not just the latest
+            sharedFlow.collect {
+                delay(3000L)
+                println("SECOND FLOW: the received number is $it")
+            }
+        }
+    }
+
+    fun incrementCounter() {
+        _stateFlow.value += 1
+    }
+
+    fun squareNumber(number: Int) {
+        viewModelScope.launch { _sharedFlow.emit(number * number) }
     }
 
     // collect, collectLatest, map, forEach, count
